@@ -27,11 +27,11 @@ public class Contacts {
         contacts.setExtendedState(JFrame.MAXIMIZED_BOTH);
         contacts.setVisible(true);
         contacts.setLayout(new BorderLayout());
-        contacts.add(this.north(),BorderLayout.NORTH);
-        contacts.add(this.west(),BorderLayout.WEST);
-        contacts.add(this.south(),BorderLayout.SOUTH);
+        //contacts.add(this.north(),BorderLayout.NORTH);
+        //contacts.add(this.west(),BorderLayout.WEST);
+        //contacts.add(this.south(),BorderLayout.SOUTH);
         contacts.add(this.center(),BorderLayout.CENTER);
-        contacts.add(this.nullPanel(),BorderLayout.EAST);
+        //contacts.add(this.nullPanel(),BorderLayout.EAST);
         return contacts;
     }
 
@@ -206,7 +206,7 @@ public class Contacts {
         cancelButton.setFocusPainted(false);
         cancelButton.setPreferredSize(new Dimension(100,50));
         cancelButton.addActionListener(e -> {
-            cardLayout.next(centerPanel);
+            cardLayout.first(centerPanel);
 
         });
         return cancelButton;
