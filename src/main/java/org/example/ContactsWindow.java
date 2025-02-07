@@ -312,3 +312,61 @@ public JButton addNewContact(){
     AddButton.addActionListener(al);
     return AddButton;
 }
+
+
+/*
+* implemented and Inner class to help me with Action Listening
+* */
+public class actionListner implements ActionListener {
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        JButton src= (JButton) e.getSource();
+        int getSelectedIndex;
+
+        if(src.equals(AddButton)){
+            cardLayout.show(centerPanel,"creationForm");
+        }
+        else if (src.equals(saveButton)){
+            String name=field.getText();
+            String number=field2.getText();
+            String email=field3.getText();
+            if(!name.isBlank()&&!number.isBlank()&&!email.isBlank()) {
+                ContactsList newContact = new ContactsList(name, number, email);
+                contactsList.add(newContact);
+                contactLisstModel.addElement(name);
+                field.setText("");
+                field2.setText("");
+                field3.setText("");
+                cardLayout.show(centerPanel,"contactList");
+            }
+
+        } else if (src.equals(cancelButton)) {
+
+            field.setText("");
+            field2.setText("");
+            field3.setText("");
+            cardLayout.show(centerPanel,"contactList");
+
+        } else if (src.equals(EditButton)) {
+
+            getSelectedIndex=contactListview.getSelectedIndex();
+            if(getSelectedIndex>=0&&getSelectedIndex<contactLisstModel.size()){
+                ContactsList c=contactsList.get(getSelectedIndex);
+                field.setText(c.getNames());
+                field2.setText(c.getEmail());
+                field3.setText(c.getNumber());
+                String names=field.getText();
+                String number=field2.getText();
+                String email=field3.getText();
+                contactsList.add(getSelectedIndex,new ContactsList(names,number,email));
+
+                cardLayout.show(centerPanel,"creationForm");
+
+            }
+
+
+        }
+    }
+}
+
