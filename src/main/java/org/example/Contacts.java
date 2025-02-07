@@ -8,10 +8,11 @@ import java.awt.*;
 
 public class Contacts {
     JFrame contacts;
-    JPanel northPanel,southPanel,westPanel,centerPanel,formPanel,newPanel;
+    JPanel northPanel,southPanel,westPanel,centerPanel,formPanel,newPanel,listPanel;
     JTextField field,field2,field3;
     String text,text2,text3;
     JButton saveButton,cancelButton;
+    JTable contactList;
     CardLayout cardLayout = new CardLayout();
 
 
@@ -57,6 +58,7 @@ public class Contacts {
     public JPanel center(){
         centerPanel= new JPanel();
         centerPanel.setLayout(cardLayout);
+        centerPanel.add(this.contactList());
         centerPanel.add(this.creationForm());
         centerPanel.add(this.contactDetails());
         centerPanel.setBackground(Color.blue);
@@ -108,7 +110,14 @@ public class Contacts {
         newPanel.isVisible();
         return newPanel;
     }
-
+    public JPanel contactList(){
+        listPanel = new JPanel();
+        contactList = new JTable(10,1);
+        listPanel.add(contactList);
+        listPanel.add(this.viewDetails());
+        listPanel.add(this.addNewContact());
+        return listPanel;
+    }
 
 
     public JTextField field(){
@@ -222,5 +231,27 @@ public class Contacts {
         return cancelButton;
     }
 
+    public JButton viewDetails(){
+        saveButton=new JButton("View Details");
+        saveButton.setBackground(new Color(60,179,113));
+        saveButton.setForeground(Color.white);
+        saveButton.setFocusPainted(false);
+        saveButton.setPreferredSize(new Dimension(100,50));
+        saveButton.addActionListener(e -> {
+            cardLayout.previous(centerPanel);
+        });
+        return saveButton;
+    }
+    public JButton addNewContact(){
+        cancelButton=new JButton("Add New Contact");
+        cancelButton.setBackground(new Color(140,17,11));
+        cancelButton.setForeground(Color.white);
+        cancelButton.setFocusPainted(false);
+        cancelButton.setPreferredSize(new Dimension(100,50));
+        cancelButton.addActionListener(e -> {
+            cardLayout.next(centerPanel);
+        });
+        return cancelButton;
+    }
 
 }
