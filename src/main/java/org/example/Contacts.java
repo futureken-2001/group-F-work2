@@ -8,7 +8,7 @@ import java.awt.*;
 
 public class Contacts {
     JFrame contacts;
-    JPanel northPanel,southPanel,westPanel,centerPanel,formPanel;
+    JPanel northPanel,southPanel,westPanel,centerPanel,formPanel,newPanel;
     JTextField field,field2,field3;
     String text,text2,text3;
     JButton saveButton,cancelButton;
@@ -58,6 +58,7 @@ public class Contacts {
         centerPanel= new JPanel();
         centerPanel.setLayout(cardLayout);
         centerPanel.add(this.creationForm());
+        centerPanel.add(this.contactDetails());
         centerPanel.setBackground(Color.blue);
         centerPanel.setPreferredSize(new Dimension(100,100));
         centerPanel.setForeground(Color.white);
@@ -87,6 +88,25 @@ public class Contacts {
         formPanel.add(this.saveContact());
         formPanel.isVisible();
         return formPanel;
+    }
+
+    public JPanel contactDetails(){
+        newPanel = new JPanel();
+        newPanel.setPreferredSize(new Dimension(100,100));
+        GridLayout gridLayout = new GridLayout(4,2);
+        gridLayout.setHgap(200);
+        gridLayout.setVgap(70);
+        newPanel.setLayout(gridLayout);
+        newPanel.add(this.name());
+        newPanel.add(this.nameOutput());
+        newPanel.add(this.number());
+        newPanel.add(this.numberOutput());
+        newPanel.add(this.email());
+        newPanel.add(this.emailOutput());
+        newPanel.add(this.delete());
+        newPanel.add(this.backToList());
+        newPanel.isVisible();
+        return newPanel;
     }
 
 
@@ -132,6 +152,27 @@ public class Contacts {
 
         return label1;
     }
+    public JLabel nameOutput(){
+        JLabel label1 =new JLabel(field.getText());
+        label1.setFont(new Font("Verdana", Font.BOLD, 14));
+        label1.setBorder(BorderFactory.createEmptyBorder(0,10,0,0));
+
+        return label1;
+    }
+    public JLabel numberOutput(){
+        JLabel label1 =new JLabel(field2.getText());
+        label1.setFont(new Font("Verdana", Font.BOLD, 14));
+        label1.setBorder(BorderFactory.createEmptyBorder(0,10,0,0));
+
+        return label1;
+    }
+    public JLabel emailOutput(){
+        JLabel label1 =new JLabel(field3.getText());
+        label1.setFont(new Font("Verdana", Font.BOLD, 14));
+        label1.setBorder(BorderFactory.createEmptyBorder(0,10,0,0));
+
+        return label1;
+    }
 
 
     public JButton saveContact(){
@@ -154,6 +195,29 @@ public class Contacts {
         cancelButton.addActionListener(e -> {
             cardLayout.next(centerPanel);
 
+        });
+        return cancelButton;
+    }
+
+    public JButton backToList(){
+        saveButton=new JButton("Back To List");
+        saveButton.setBackground(new Color(60,179,113));
+        saveButton.setForeground(Color.white);
+        saveButton.setFocusPainted(false);
+        saveButton.setPreferredSize(new Dimension(100,50));
+        saveButton.addActionListener(e -> {
+            cardLayout.first(centerPanel);
+        });
+        return saveButton;
+    }
+    public JButton delete(){
+        cancelButton=new JButton("Delete");
+        cancelButton.setBackground(new Color(140,17,11));
+        cancelButton.setForeground(Color.white);
+        cancelButton.setFocusPainted(false);
+        cancelButton.setPreferredSize(new Dimension(100,50));
+        cancelButton.addActionListener(e -> {
+            cardLayout.previous(centerPanel);
         });
         return cancelButton;
     }
