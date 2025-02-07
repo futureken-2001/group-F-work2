@@ -5,7 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class ContactsWindow {
+public class Contacts {
 
     private ArrayList<ContactsList> contactsList = new ArrayList<>();
     private DefaultListModel<String> contactLisstModel;
@@ -19,7 +19,7 @@ public class ContactsWindow {
     private CardLayout cardLayout = new CardLayout();
     actionListner al = new actionListner();
 
-    public ContactsWindow() {
+    public Contacts() {
         this.ContactsWindow();
     }
 
