@@ -210,3 +210,105 @@ public JLabel emailOutput(){
     labelOutput3.setBorder(BorderFactory.createEmptyBorder(0,10,0,0));
     return labelOutput3;
 }
+
+
+/*
+* Adding designes and actionLitners to the implemeted buttons
+* */
+public JButton saveContact(){
+    saveButton=new JButton("Save Contact");
+    saveButton.setBackground(new Color(60,179,113));
+    saveButton.setForeground(Color.white);
+    saveButton.setFocusPainted(false);
+    saveButton.setPreferredSize(new Dimension(100,50));
+    saveButton.addActionListener(al);
+    return saveButton;
+}
+
+//design implementaion of the EditButton
+public JButton EditContact(){
+    EditButton=new JButton("EDIT");
+    EditButton.setBackground(new Color(30,144,255));
+    EditButton.setForeground(Color.white);
+    EditButton.setFocusPainted(false);
+    EditButton.setPreferredSize(new Dimension(100,50));
+    EditButton.addActionListener(al);
+    return EditButton;
+}
+
+//logic for the cancel button
+public JButton cancel(){
+    cancelButton=new JButton("Cancel");
+    cancelButton.setBackground(new Color(140,17,11));
+    cancelButton.setForeground(Color.white);
+    cancelButton.setFocusPainted(false);
+    cancelButton.setPreferredSize(new Dimension(100,50));
+    cancelButton.addActionListener(al);
+    return cancelButton;
+}
+
+//logic for the backToList button
+public JButton backToList(){
+    backToListButton=new JButton("Back To List");
+    backToListButton.setBackground(new Color(60,179,113));
+    backToListButton.setForeground(Color.white);
+    backToListButton.setFocusPainted(false);
+    backToListButton.setPreferredSize(new Dimension(100,50));
+    backToListButton.addActionListener(e -> {
+        cardLayout.first(centerPanel);
+    });
+    return backToListButton;
+}
+
+//Logic for the delete button
+public JButton delete(){
+    deleteButton=new JButton("Delete");
+    deleteButton.setBackground(new Color(140,17,11));
+    deleteButton.setForeground(Color.white);
+    deleteButton.setFocusPainted(false);
+    deleteButton.setPreferredSize(new Dimension(100,50));
+    deleteButton.addActionListener(e -> {
+        int selected= contactListview.getSelectedIndex();
+        if(selected>=0&&selected<contactLisstModel.size()){
+            contactsList.remove(selected);
+            contactLisstModel.remove(selected);
+            cardLayout.show(centerPanel,"contactList");
+        }
+
+    });
+    return deleteButton;
+}
+//logic for the viewDetailsButton
+public JButton viewDetailsButton(){
+    viewButton=new JButton("View Details");
+    viewButton.setBackground(new Color(60,179,113));
+    viewButton.setForeground(Color.white);
+    viewButton.setFocusPainted(false);
+    viewButton.setPreferredSize(new Dimension(150,50));
+    viewButton.addActionListener(e->{
+        int getSelectedIndex=contactListview.getSelectedIndex();
+        if(getSelectedIndex>=0&&getSelectedIndex<contactLisstModel.size()){
+            ContactsList c=contactsList.get(getSelectedIndex);
+            text=c.getNames();
+            text2=c.getNumber();
+            text3=c.getEmail();
+            labelOutput1.setText(text);
+            labelOutput2.setText(text3);
+            labelOutput3.setText(text2);
+            cardLayout.show(centerPanel,"contactDetails");
+        }
+
+    });
+    return viewButton;
+}
+
+//logic for addNewContct Button
+public JButton addNewContact(){
+    AddButton=new JButton("Add New Contact");
+    AddButton.setBackground(new Color(140,17,11));
+    AddButton.setForeground(Color.white);
+    AddButton.setFocusPainted(false);
+    AddButton.setPreferredSize(new Dimension(150,50));
+    AddButton.addActionListener(al);
+    return AddButton;
+}
