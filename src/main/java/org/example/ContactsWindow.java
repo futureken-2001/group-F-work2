@@ -18,6 +18,11 @@ public class ContactsWindow {
     private CardLayout cardLayout = new CardLayout();
     actionListner al=new actionListner();
 
+//constructure which calls the method ContactsWindow method
+public ContactsWindow() {
+    this.ContactsWindow();
+}
+
     //creating JFrame
     public JFrame ContactsWindow(){
         contacts=new JFrame("Contacts");
@@ -32,5 +37,7 @@ public class ContactsWindow {
         contacts.add(this.nullPanel(),BorderLayout.EAST);
         return contacts;
     }
+
+
 
 }
