@@ -81,3 +81,18 @@ public JPanel center(){
 }
 
 }
+
+/*
+* Panel which has the first Card
+* */
+public JPanel contactList(){
+    listPanel = new JPanel();
+    contactLisstModel=new DefaultListModel<>();
+    contactListview=new JList<>(contactLisstModel);
+    contactListview.setPreferredSize(new Dimension(150,600));
+    listPanel.add(contactListview);
+    listPanel.add(this.viewDetailsButton());
+    listPanel.add(this.addNewContact());
+    listPanel.add(this.EditContact());
+    return listPanel;
+}
