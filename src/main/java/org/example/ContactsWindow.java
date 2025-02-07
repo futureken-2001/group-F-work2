@@ -96,3 +96,24 @@ public JPanel contactList(){
     listPanel.add(this.EditContact());
     return listPanel;
 }
+
+/*
+* form card for adding new Contact to the List/firstCard
+* */
+public JPanel creationForm(){
+    formPanel = new JPanel();
+    formPanel.setPreferredSize(new Dimension(100,100));
+    GridLayout gridLayout = new GridLayout(4,2);
+    gridLayout.setHgap(10);
+    gridLayout.setVgap(10);
+    formPanel.setLayout(gridLayout);
+    formPanel.add(this.name());
+    formPanel.add(this.field());
+    formPanel.add(this.number());
+    formPanel.add(this.field2());
+    formPanel.add(this.email());
+    formPanel.add(this.field3());
+    formPanel.add(this.cancel());
+    formPanel.add(this.saveContact());
+    return formPanel;
+}
