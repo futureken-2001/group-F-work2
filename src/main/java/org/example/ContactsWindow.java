@@ -64,6 +64,20 @@ public ContactsWindow() {
         right.setPreferredSize(new Dimension(200,100));
         return right;
     }
-
+/*
+* Parent pannel which is to contain the cardLayouts
+* that make up the UI
+* */
+public JPanel center(){
+    centerPanel= new JPanel();
+    centerPanel.setLayout(cardLayout);
+    centerPanel.add(this.contactList(),"contactList");
+    centerPanel.add(this.creationForm(),"creationForm");
+    centerPanel.add(this.contactDetails(),"contactDetails");
+    centerPanel.setBackground(Color.blue);
+    centerPanel.setPreferredSize(new Dimension(100,100));
+    centerPanel.setForeground(Color.white);
+    return centerPanel;
+}
 
 }
