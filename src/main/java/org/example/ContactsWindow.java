@@ -18,4 +18,19 @@ public class ContactsWindow {
     private CardLayout cardLayout = new CardLayout();
     actionListner al=new actionListner();
 
+    //creating JFrame
+    public JFrame ContactsWindow(){
+        contacts=new JFrame("Contacts");
+        contacts.setMinimumSize(new Dimension(800,600));
+        contacts.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        contacts.setVisible(true);
+        contacts.setLayout(new BorderLayout());
+        contacts.add(this.north(),BorderLayout.NORTH);
+        contacts.add(this.west(),BorderLayout.WEST);
+        contacts.add(this.south(),BorderLayout.SOUTH);
+        contacts.add(this.center(),BorderLayout.CENTER);
+        contacts.add(this.nullPanel(),BorderLayout.EAST);
+        return contacts;
+    }
+
 }
