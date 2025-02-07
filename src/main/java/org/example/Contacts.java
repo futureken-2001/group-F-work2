@@ -191,8 +191,12 @@ public class Contacts {
         saveButton.setFocusPainted(false);
         saveButton.setPreferredSize(new Dimension(100,50));
         saveButton.addActionListener(e -> {
-            cardLayout.next(centerPanel);
-        });
+            if(!field.getText().isBlank()&&!field2.getText().isBlank()&&!field3.getText().isBlank()) {
+                cardLayout.next(centerPanel);
+                field.setText("");
+                field2.setText("");
+                field3.setText("");
+            }});
         return saveButton;
     }
     public JButton cancel(){
