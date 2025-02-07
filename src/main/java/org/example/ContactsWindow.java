@@ -117,3 +117,96 @@ public JPanel creationForm(){
     formPanel.add(this.saveContact());
     return formPanel;
 }
+
+/*
+* label card to show the deails for a pecific contact selected from the firstCard
+* */
+public JPanel contactDetails(){
+    newPanel = new JPanel();
+    newPanel.setPreferredSize(new Dimension(100,100));
+    GridLayout gridLayout = new GridLayout(4,2);
+    gridLayout.setHgap(20);
+    gridLayout.setVgap(20);
+    newPanel.setLayout(gridLayout);
+    newPanel.add(this.name());
+    newPanel.add(this.nameOutput());
+    newPanel.add(this.number());
+    newPanel.add(this.numberOutput());
+    newPanel.add(this.email());
+    newPanel.add(this.emailOutput());
+    newPanel.add(this.delete());
+    newPanel.add(this.backToList());
+    newPanel.isVisible();
+    return newPanel;
+}
+
+/*
+* making methods to be used in the already made cards
+* */
+
+//text field of the Name in the formCreation Card
+public JTextField field(){
+    field=new JTextField();
+    return field;
+}
+//text field of the number in the formCreation Card
+public JTextField field2(){
+    field2=new JTextField();
+    return field2;
+}
+
+//text field of the email in the formCreation Card
+public JTextField field3(){
+    field3=new JTextField();
+    //text3=field3.getText();
+    return field3;
+}
+
+//method for the Name label in the formCard
+public JLabel name(){
+    label2 =new JLabel("Name:");
+    label2.setFont(new Font("Verdana", Font.BOLD, 16));
+    label2.setBorder(BorderFactory.createEmptyBorder(0,10,0,0));
+
+    return label2;
+}
+//method for the Number label in the formCard
+public JLabel number(){
+    label1 =new JLabel("Contact:");
+    label1.setFont(new Font("Verdana", Font.BOLD, 16));
+    label1.setBorder(BorderFactory.createEmptyBorder(0,10,0,0));
+
+    return label1;
+}
+//method for the email label in the formCard
+public JLabel email(){
+    label3 =new JLabel("Email:");
+    label3.setFont(new Font("Verdana", Font.BOLD, 16));
+    label3.setBorder(BorderFactory.createEmptyBorder(0,10,0,0));
+
+    return label3;
+}
+
+//displays the name detail for the selected contact
+public JLabel nameOutput(){
+    labelOutput1 =new JLabel();
+    labelOutput1.setFont(new Font("Verdana", Font.BOLD, 14));
+    labelOutput1.setBorder(BorderFactory.createEmptyBorder(0,10,0,0));
+
+    return labelOutput1;
+}
+//displays the number detail for the selected contact
+public JLabel numberOutput(){
+    labelOutput2 =new JLabel();
+    labelOutput2.setFont(new Font("Verdana", Font.BOLD, 14));
+    labelOutput2.setBorder(BorderFactory.createEmptyBorder(0,10,0,0));
+
+    return labelOutput2;
+}
+//desplays the email detail for the selected contact
+public JLabel emailOutput(){
+    labelOutput3 =new JLabel();
+    labelOutput3.setFont(new Font("Verdana", Font.BOLD, 14));
+    labelOutput3.setBorder(BorderFactory.createEmptyBorder(0,10,0,0));
+    return labelOutput3;
+}
