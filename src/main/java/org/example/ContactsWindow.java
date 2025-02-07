@@ -38,6 +38,32 @@ public ContactsWindow() {
         return contacts;
     }
 
+    /*
+    *panels that help size up the to be used center Space for the cardLayout
+     */
+
+    public JPanel north(){
+        northPanel= new JPanel();
+        northPanel.setPreferredSize(new Dimension(100,250));
+        return northPanel;
+    }
+    public JPanel south(){
+        southPanel= new JPanel();
+        southPanel.setPreferredSize(new Dimension(100,200));
+        return southPanel;
+    }
+
+    public JPanel west(){
+        westPanel= new JPanel();
+        westPanel.setPreferredSize(new Dimension(250,100));
+
+        return westPanel;
+    }
+    public JPanel nullPanel(){
+        JPanel right=new JPanel();
+        right.setPreferredSize(new Dimension(200,100));
+        return right;
+    }
 
 
 }
