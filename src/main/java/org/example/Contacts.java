@@ -11,7 +11,7 @@ public class Contacts {
     private JPanel northPanel, southPanel, westPanel, centerPanel, formPanel, viewPanel, listPanel,editPanel;
     private JTextField field, field2, field3,Editfield,Editfield2,Editfield3;
     private String text, text2, text3;
-    private JLabel label2, label1, label3, labelOutput1, labelOutput2, labelOutput3;
+    private JLabel label2, label1, label3, labelOutput1, labelOutput2, labelOutput3,title;
     JList contactListview;
     private JButton saveButton, cancelButton, EditButton, AddButton, backToListButton, deleteButton, viewButton,Edit,EditcancelButton;
     private CardLayout cardLayout = new CardLayout();
@@ -81,17 +81,32 @@ public class Contacts {
      * Panel which has the first Card
      * */
     public JPanel contactList(){
+
         listPanel = new JPanel();
+        listPanel.setLayout(new BorderLayout());
+        listPanel.add(BorderLayout.CENTER,this.upperList());
+        listPanel.add(BorderLayout.SOUTH,this.downerList());
+
+        return listPanel;
+    }
+//The list part of the contact list
+    public JPanel upperList(){
+        JPanel up=new JPanel();
         contactLisstModel=new DefaultListModel<>();
         contactListview=new JList<>(contactLisstModel);
         contactListview.setPreferredSize(new Dimension(150,600));
-        listPanel.add(contactListview);
-        listPanel.add(this.viewDetailsButton());
-        listPanel.add(this.addNewContact());
-        listPanel.add(this.EditContact());
-        return listPanel;
+        up.add(contactListview);
+        return up;
     }
+    //the the downwer panel of the contact List
+    public JPanel downerList(){
+        JPanel down=new JPanel();
+        down.add(this.viewDetailsButton());
+        down.add(this.addNewContact());
+        down.add(this.EditContact());
 
+        return down;
+    }
     /*
      * form card for adding new Contact to the List/firstCard
      * */
@@ -102,6 +117,7 @@ public class Contacts {
         gridLayout.setHgap(10);
         gridLayout.setVgap(10);
         formPanel.setLayout(gridLayout);
+
         formPanel.add(this.name());
         formPanel.add(this.field());
         formPanel.add(this.number());
@@ -250,6 +266,7 @@ public JPanel editForm(){
         saveButton.setForeground(Color.white);
         saveButton.setFocusPainted(false);
         saveButton.setPreferredSize(new Dimension(100,50));
+
         saveButton.addActionListener(e->{
                     String name = field.getText();
                     String number = field2.getText();
@@ -261,6 +278,7 @@ public JPanel editForm(){
                         field.setText("");
                         field2.setText("");
                         field3.setText("");
+
                         cardLayout.show(centerPanel, "contactList");}
         });
         return saveButton;
@@ -274,7 +292,14 @@ public JPanel editForm(){
         EditButton.setFocusPainted(false);
         EditButton.setPreferredSize(new Dimension(100,50));
         EditButton.addActionListener(e->{
-            cardLayout.show(centerPanel,"editForm");
+            int selectedIndex=contactListview.getSelectedIndex();
+            if(selectedIndex >= 0 && selectedIndex < contactLisstModel.size()){
+                ContactsList c=contactsList.get(selectedIndex);
+                Editfield.setText(c.getNames());
+                Editfield3.setText(c.getNumber());
+                Editfield2.setText(c.getEmail());
+                cardLayout.show(centerPanel,"editForm");
+            }
         });
         return EditButton;
     }
@@ -290,13 +315,19 @@ public JPanel editForm(){
             int selectedIndex=contactListview.getSelectedIndex();
             if(selectedIndex >= 0 && selectedIndex < contactLisstModel.size()){
                 ContactsList c=contactsList.get(selectedIndex);
-                Editfield.setText(c.getNames());
-                Editfield3.setText(c.getNumber());
-                Editfield2.setText(c.getEmail());
-                c.edit(Editfield.getText(),Editfield3.getText(),Editfield2.getText());
-                contactListview.setName(Editfield.getText());
-                cardLayout.show(centerPanel,"contactList");
 
+                c.setNames(Editfield.getText());
+                c.setNumber(Editfield2.getText());
+                c.setEmail(Editfield3.getText());
+
+
+
+                contactsList.set(selectedIndex,new ContactsList(Editfield.getText(),Editfield2.getText(),Editfield3.getText()));
+                contactLisstModel.set(selectedIndex,c.getNames());
+
+
+                System.out.println(c.getNames());
+                cardLayout.show(centerPanel,"contactList");
             }
 
         });
