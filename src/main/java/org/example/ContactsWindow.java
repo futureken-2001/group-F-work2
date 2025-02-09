@@ -1,8 +1,6 @@
 package org.example;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class ContactsWindow {
@@ -10,14 +8,14 @@ public class ContactsWindow {
     private ArrayList<ContactsList> contactsList = new ArrayList<>();
     private DefaultListModel<String> contactLisstModel;
     private JFrame contacts;
-    private JPanel northPanel, southPanel, westPanel, centerPanel, formPanel, newPanel, listPanel;
-    private JTextField field, field2, field3;
+    private JPanel northPanel, southPanel, westPanel, centerPanel, formPanel, viewPanel, listPanel,editPanel;
+    private JTextField field, field2, field3,Editfield,Editfield2,Editfield3;
     private String text, text2, text3;
     private JLabel label2, label1, label3, labelOutput1, labelOutput2, labelOutput3;
     JList contactListview;
-    private JButton saveButton, cancelButton, EditButton, AddButton, backToListButton, deleteButton, viewButton;
+    private JButton saveButton, cancelButton, EditButton, AddButton, backToListButton, deleteButton, viewButton,Edit,EditcancelButton;
     private CardLayout cardLayout = new CardLayout();
-    actionListner al = new actionListner();
+
 
     public ContactsWindow() {
         this.ContactsWindow();
@@ -72,6 +70,7 @@ public class ContactsWindow {
         centerPanel.add(this.contactList(),"contactList");
         centerPanel.add(this.creationForm(),"creationForm");
         centerPanel.add(this.contactDetails(),"contactDetails");
+        centerPanel.add(this.editForm(),"editForm");
         centerPanel.setBackground(Color.blue);
         centerPanel.setPreferredSize(new Dimension(100,100));
         centerPanel.setForeground(Color.white);
@@ -114,31 +113,66 @@ public class ContactsWindow {
         return formPanel;
     }
 
+//    Edit Form
+public JPanel editForm(){
+    editPanel = new JPanel();
+    editPanel.setPreferredSize(new Dimension(100,100));
+    GridLayout gridLayout = new GridLayout(4,2);
+    gridLayout.setHgap(10);
+    gridLayout.setVgap(10);
+    editPanel.setLayout(gridLayout);
+    editPanel.add(this.name());
+    editPanel.add(this.Editfield());
+    editPanel.add(this.number());
+    editPanel.add(this.Editfield2());
+    editPanel.add(this.email());
+    editPanel.add(this.Editfield3());
+    editPanel.add(this.cancelEdit());
+    editPanel.add(this.EditButton());
+    return editPanel;
+}
+
     /*
      * label card to show the deails for a pecific contact selected from the firstCard
      * */
     public JPanel contactDetails(){
-        newPanel = new JPanel();
-        newPanel.setPreferredSize(new Dimension(100,100));
+        viewPanel = new JPanel();
+        viewPanel.setPreferredSize(new Dimension(100,100));
         GridLayout gridLayout = new GridLayout(4,2);
         gridLayout.setHgap(20);
         gridLayout.setVgap(20);
-        newPanel.setLayout(gridLayout);
-        newPanel.add(this.name());
-        newPanel.add(this.nameOutput());
-        newPanel.add(this.number());
-        newPanel.add(this.numberOutput());
-        newPanel.add(this.email());
-        newPanel.add(this.emailOutput());
-        newPanel.add(this.delete());
-        newPanel.add(this.backToList());
-        newPanel.isVisible();
-        return newPanel;
+        viewPanel.setLayout(gridLayout);
+        viewPanel.add(this.name());
+        viewPanel.add(this.nameOutput());
+        viewPanel.add(this.number());
+        viewPanel.add(this.numberOutput());
+        viewPanel.add(this.email());
+        viewPanel.add(this.emailOutput());
+        viewPanel.add(this.delete());
+        viewPanel.add(this.backToList());
+        viewPanel.isVisible();
+        return viewPanel;
     }
 
     /*
      * making methods to be used in the already made cards
      * */
+    public JTextField Editfield(){
+        Editfield=new JTextField();
+        return Editfield;
+    }
+    //text field of the number in the formCreation Card
+    public JTextField Editfield2(){
+        Editfield2=new JTextField();
+        return Editfield2;
+    }
+
+    //text field of the email in the formCreation Card
+    public JTextField Editfield3(){
+         Editfield3=new JTextField();
+          return Editfield3;
+    }
+
 
     //text field of the Name in the formCreation Card
     public JTextField field(){
@@ -216,7 +250,19 @@ public class ContactsWindow {
         saveButton.setForeground(Color.white);
         saveButton.setFocusPainted(false);
         saveButton.setPreferredSize(new Dimension(100,50));
-        saveButton.addActionListener(al);
+        saveButton.addActionListener(e->{
+                    String name = field.getText();
+                    String number = field2.getText();
+                    String email = field3.getText();
+                    if (!name.isBlank() && !number.isBlank() && !email.isBlank()) {
+                        ContactsList newContact = new ContactsList(name, number, email);
+                        contactsList.add(newContact);
+                        contactLisstModel.addElement(name);
+                        field.setText("");
+                        field2.setText("");
+                        field3.setText("");
+                        cardLayout.show(centerPanel, "contactList");}
+        });
         return saveButton;
     }
 
@@ -227,10 +273,50 @@ public class ContactsWindow {
         EditButton.setForeground(Color.white);
         EditButton.setFocusPainted(false);
         EditButton.setPreferredSize(new Dimension(100,50));
-        EditButton.addActionListener(al);
+        EditButton.addActionListener(e->{
+            cardLayout.show(centerPanel,"editForm");
+        });
         return EditButton;
     }
 
+    //design Contact Button
+    public JButton EditButton(){
+        Edit=new JButton("COMFIRM EDIT");
+        Edit.setBackground(new Color(30,144,255));
+        Edit.setForeground(Color.white);
+        Edit.setFocusPainted(false);
+        Edit.setPreferredSize(new Dimension(100,50));
+        Edit.addActionListener(e->{
+            int selectedIndex=contactListview.getSelectedIndex();
+            if(selectedIndex >= 0 && selectedIndex < contactLisstModel.size()){
+                ContactsList c=contactsList.get(selectedIndex);
+                Editfield.setText(c.getNames());
+                Editfield3.setText(c.getNumber());
+                Editfield2.setText(c.getEmail());
+                c.edit(Editfield.getText(),Editfield3.getText(),Editfield2.getText());
+                contactListview.setName(Editfield.getText());
+                cardLayout.show(centerPanel,"contactList");
+
+            }
+
+        });
+        return Edit;
+    }
+//cancel on edit form
+public JButton cancelEdit(){
+    EditcancelButton=new JButton("Cancel");
+    EditcancelButton.setBackground(new Color(140,17,11));
+    EditcancelButton.setForeground(Color.white);
+    EditcancelButton.setFocusPainted(false);
+    EditcancelButton.setPreferredSize(new Dimension(100,50));
+    EditcancelButton.addActionListener(e->{
+        Editfield.setText("");
+        Editfield2.setText("");
+        Editfield3.setText("");
+        cardLayout.show(centerPanel, "contactList");
+    });
+    return EditcancelButton;
+}
     //logic for the cancel button
     public JButton cancel(){
         cancelButton=new JButton("Cancel");
@@ -238,7 +324,12 @@ public class ContactsWindow {
         cancelButton.setForeground(Color.white);
         cancelButton.setFocusPainted(false);
         cancelButton.setPreferredSize(new Dimension(100,50));
-        cancelButton.addActionListener(al);
+        cancelButton.addActionListener(e->{
+            field.setText("");
+            field2.setText("");
+            field3.setText("");
+            cardLayout.show(centerPanel, "contactList");
+        });
         return cancelButton;
     }
 
@@ -304,65 +395,14 @@ public class ContactsWindow {
         AddButton.setForeground(Color.white);
         AddButton.setFocusPainted(false);
         AddButton.setPreferredSize(new Dimension(150,50));
-        AddButton.addActionListener(al);
+        AddButton.addActionListener(e->{
+            cardLayout.show(centerPanel, "creationForm");
+        });
         return AddButton;
     }
 
-/*
-* implemented and Inner class to help me with Action Listening
-* */
-    public class actionListner implements ActionListener {
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            JButton src = (JButton) e.getSource();
-            int getSelectedIndex;
-
-            if (src.equals(AddButton)) {
-                cardLayout.show(centerPanel, "creationForm");
-            } else if (src.equals(saveButton)) {
-                String name = field.getText();
-                String number = field2.getText();
-                String email = field3.getText();
-                if (!name.isBlank() && !number.isBlank() && !email.isBlank()) {
-                    ContactsList newContact = new ContactsList(name, number, email);
-                    contactsList.add(newContact);
-                    contactLisstModel.addElement(name);
-                    field.setText("");
-                    field2.setText("");
-                    field3.setText("");
-                    cardLayout.show(centerPanel, "contactList");
-                }
-
-            } else if (src.equals(cancelButton)) {
-
-                field.setText("");
-                field2.setText("");
-                field3.setText("");
-                cardLayout.show(centerPanel, "contactList");
-
-            } else if (src.equals(EditButton)) {
-
-                getSelectedIndex = contactListview.getSelectedIndex();
-                if (getSelectedIndex >= 0 && getSelectedIndex < contactLisstModel.size()) {
-                    ContactsList c = contactsList.get(getSelectedIndex);
-                    field.setText(c.getNames());
-                    field2.setText(c.getEmail());
-                    field3.setText(c.getNumber());
-                    String names = field.getText();
-                    String number = field2.getText();
-                    String email = field3.getText();
-                    contactsList.add(getSelectedIndex, new ContactsList(names, number, email));
-
-                    cardLayout.show(centerPanel, "creationForm");
-
-                }
 
 
-            }
-        }
-
-    }
 
 
 

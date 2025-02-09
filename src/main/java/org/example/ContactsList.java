@@ -34,4 +34,10 @@ public class ContactsList {
     public void setNumber(String number) {
         this.number = number;
     }
+
+    public void edit(String name,String contact,String email ){
+        setNames(name);
+        setNumber(contact);
+        setEmail(email);
+    }
 }
