@@ -3,7 +3,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class ContactsWindow {
+public class Contacts {
 
     private ArrayList<ContactsList> contactsList = new ArrayList<>();
     private DefaultListModel<String> contactLisstModel;
@@ -17,7 +17,7 @@ public class ContactsWindow {
     private CardLayout cardLayout = new CardLayout();
 
 
-    public ContactsWindow() {
+    public Contacts() {
         this.ContactsWindow();
     }
 
