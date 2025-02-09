@@ -326,7 +326,7 @@ public JPanel editForm(){
                 contactLisstModel.set(selectedIndex,c.getNames());
 
 
-                System.out.println(c.getNames());
+
                 cardLayout.show(centerPanel,"contactList");
             }
 
