@@ -3,7 +3,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class Contacts {
+public class Contacts 
+{
 
     private ArrayList<ContactsList> contactsList = new ArrayList<>();
     private DefaultListModel<String> contactLisstModel;
@@ -17,12 +18,14 @@ public class Contacts {
     private CardLayout cardLayout = new CardLayout();
 
 
-    public Contacts() {
+    public Contacts()
+    {
         this.ContactsWindow();
     }
 
     //creating JFrame
-    public JFrame ContactsWindow(){
+    public JFrame ContactsWindow()
+    {
         contacts=new JFrame("Contacts");
         contacts.setMinimumSize(new Dimension(800,600));
         contacts.setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -37,24 +40,28 @@ public class Contacts {
     }
 
 
-    public JPanel north(){
+    public JPanel north()
+    {
         northPanel= new JPanel();
         northPanel.setPreferredSize(new Dimension(100,250));
         return northPanel;
     }
-    public JPanel south(){
+    public JPanel south()
+    {
         southPanel= new JPanel();
         southPanel.setPreferredSize(new Dimension(100,200));
         return southPanel;
     }
 
-    public JPanel west(){
+    public JPanel west()
+    {
         westPanel= new JPanel();
         westPanel.setPreferredSize(new Dimension(250,100));
 
         return westPanel;
     }
-    public JPanel nullPanel(){
+    public JPanel nullPanel()
+    {
         JPanel right=new JPanel();
         right.setPreferredSize(new Dimension(200,100));
         return right;
@@ -64,7 +71,8 @@ public class Contacts {
      * Parent pannel which is to contain the cardLayouts
      * that make up the UI
      * */
-    public JPanel center(){
+    public JPanel center()
+    {
         centerPanel= new JPanel();
         centerPanel.setLayout(cardLayout);
         centerPanel.add(this.contactList(),"contactList");
@@ -80,7 +88,8 @@ public class Contacts {
     /*
      * Panel which has the first Card
      * */
-    public JPanel contactList(){
+    public JPanel contactList()
+    {
 
         listPanel = new JPanel();
         listPanel.setLayout(new BorderLayout());
@@ -99,7 +108,8 @@ public class Contacts {
         return up;
     }
     //the the downwer panel of the contact List
-    public JPanel downerList(){
+    public JPanel downerList()
+    {
         JPanel down=new JPanel();
         down.add(this.viewDetailsButton());
         down.add(this.addNewContact());
@@ -110,7 +120,8 @@ public class Contacts {
     /*
      * form card for adding new Contact to the List/firstCard
      * */
-    public JPanel creationForm(){
+    public JPanel creationForm()
+    {
         formPanel = new JPanel();
         formPanel.setPreferredSize(new Dimension(100,100));
         GridLayout gridLayout = new GridLayout(4,2);
@@ -130,7 +141,8 @@ public class Contacts {
     }
 
     //    Edit Form
-    public JPanel editForm(){
+    public JPanel editForm()
+    {
         editPanel = new JPanel();
         editPanel.setPreferredSize(new Dimension(100,100));
         GridLayout gridLayout = new GridLayout(4,2);
@@ -151,7 +163,8 @@ public class Contacts {
     /*
      * label card to show the deails for a pecific contact selected from the firstCard
      * */
-    public JPanel contactDetails(){
+    public JPanel contactDetails()
+    {
         viewPanel = new JPanel();
         viewPanel.setPreferredSize(new Dimension(100,100));
         GridLayout gridLayout = new GridLayout(4,2);
@@ -184,7 +197,8 @@ public class Contacts {
     }
 
     //text field of the email in the formCreation Card
-    public JTextField Editfield3(){
+    public JTextField Editfield3()
+    {
         Editfield3=new JTextField();
         return Editfield3;
     }
@@ -196,7 +210,8 @@ public class Contacts {
         return field;
     }
     //text field of the number in the formCreation Card
-    public JTextField field2(){
+    public JTextField field2()
+    {
         field2=new JTextField();
         return field2;
     }
@@ -234,7 +249,8 @@ public class Contacts {
     }
 
     //displays the name detail for the selected contact
-    public JLabel nameOutput(){
+    public JLabel nameOutput()
+    {
         labelOutput1 =new JLabel();
         labelOutput1.setFont(new Font("Verdana", Font.BOLD, 14));
         labelOutput1.setBorder(BorderFactory.createEmptyBorder(0,10,0,0));
@@ -271,7 +287,8 @@ public class Contacts {
             String name = field.getText();
             String number = field2.getText();
             String email = field3.getText();
-            if (!name.isBlank() && !number.isBlank() && !email.isBlank()) {
+            if (!name.isBlank() && !number.isBlank() && !email.isBlank()) 
+            {
                 ContactsList newContact = new ContactsList(name, number, email);
                 contactsList.add(newContact);
                 contactLisstModel.addElement(name);
@@ -285,7 +302,8 @@ public class Contacts {
     }
 
     //design implementaion of the EditButton
-    public JButton EditContact(){
+    public JButton EditContact()
+    {
         EditButton=new JButton("EDIT");
         EditButton.setBackground(new Color(30,144,255));
         EditButton.setForeground(Color.white);
@@ -305,7 +323,8 @@ public class Contacts {
     }
 
     //design Contact Button
-    public JButton EditButton(){
+    public JButton EditButton()
+    {
         Edit=new JButton("COMFIRM EDIT");
         Edit.setBackground(new Color(30,144,255));
         Edit.setForeground(Color.white);
@@ -334,7 +353,8 @@ public class Contacts {
         return Edit;
     }
     //cancel on edit form
-    public JButton cancelEdit(){
+    public JButton cancelEdit()
+    {
         EditcancelButton=new JButton("Cancel");
         EditcancelButton.setBackground(new Color(140,17,11));
         EditcancelButton.setForeground(Color.white);
@@ -365,7 +385,8 @@ public class Contacts {
     }
 
     //logic for the backToList button
-    public JButton backToList(){
+    public JButton backToList()
+    {
         backToListButton=new JButton("Back To List");
         backToListButton.setBackground(new Color(60,179,113));
         backToListButton.setForeground(Color.white);
@@ -378,7 +399,8 @@ public class Contacts {
     }
 
     //Logic for the delete button
-    public JButton delete(){
+    public JButton delete()
+    {
         deleteButton=new JButton("Delete");
         deleteButton.setBackground(new Color(140,17,11));
         deleteButton.setForeground(Color.white);
@@ -396,7 +418,8 @@ public class Contacts {
         return deleteButton;
     }
     //logic for the viewDetailsButton
-    public JButton viewDetailsButton(){
+    public JButton viewDetailsButton()
+    {
         viewButton=new JButton("View Details");
         viewButton.setBackground(new Color(60,179,113));
         viewButton.setForeground(Color.white);
@@ -404,7 +427,8 @@ public class Contacts {
         viewButton.setPreferredSize(new Dimension(150,50));
         viewButton.addActionListener(e->{
             int getSelectedIndex=contactListview.getSelectedIndex();
-            if(getSelectedIndex>=0&&getSelectedIndex<contactLisstModel.size()){
+            if(getSelectedIndex>=0&&getSelectedIndex<contactLisstModel.size())
+            {
                 ContactsList c=contactsList.get(getSelectedIndex);
                 text=c.getNames();
                 text2=c.getNumber();
@@ -420,7 +444,8 @@ public class Contacts {
     }
 
     //logic for addNewContct Button
-    public JButton addNewContact(){
+    public JButton addNewContact()
+    {
         AddButton=new JButton("Add New Contact");
         AddButton.setBackground(new Color(140,17,11));
         AddButton.setForeground(Color.white);
