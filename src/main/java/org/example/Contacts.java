@@ -276,7 +276,8 @@ public class Contacts
     /*
      * Adding designes and actionLitners to the implemeted buttons
      * */
-    public JButton saveContact(){
+    public JButton saveContact()
+    {
         saveButton=new JButton("Save Contact");
         saveButton.setBackground(new Color(60,179,113));
         saveButton.setForeground(Color.white);
