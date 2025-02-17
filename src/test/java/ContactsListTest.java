@@ -1,10 +1,8 @@
-package org.example.test.java;
-
 import org.example.ContactsList;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.*;
+
 public class ContactsListTest {
     @Test
     public void testContactsList(){
